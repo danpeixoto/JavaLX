@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="389.0" prefWidth="432.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ControladorJanelaCadastro">
+   <children>
+      <TextField fx:id="nomeUsuario" alignment="CENTER" layoutX="43.0" layoutY="33.0" prefHeight="47.0" prefWidth="351.0" promptText="Usuário" style="-fx-background-color: lightgrey; -fx-text-fill: #61b876; -fx-prompt-text-fill: white;">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="senhaUsurio" alignment="CENTER" layoutX="43.0" layoutY="86.0" prefHeight="47.0" prefWidth="351.0" promptText="Senha" style="-fx-background-color: lightgrey; -fx-text-fill: #61b876; -fx-prompt-text-fill: white;" />
+      <Button fx:id="cadastrarBnt" layoutX="43.0" layoutY="305.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="351.0" style="-fx-background-color: #61b876;" text="Cadastrar" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="33.0" />
+         </font>
+      </Button>
+      <TextField fx:id="emailUsuario" alignment="CENTER" layoutX="43.0" layoutY="139.0" prefHeight="47.0" prefWidth="351.0" promptText="Email" style="-fx-background-color: lightgrey; -fx-text-fill: #61b876; -fx-prompt-text-fill: white;">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="celUsuario" alignment="CENTER" layoutX="43.0" layoutY="193.0" prefHeight="47.0" prefWidth="351.0" promptText="Celular" style="-fx-background-color: lightgrey; -fx-text-fill: #61b876; -fx-prompt-text-fill: white;">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </TextField>
+      <ComboBox fx:id="estados" layoutX="43.0" layoutY="259.0" prefWidth="150.0" promptText="Estados" style="-fx-background-color: #f5d21f;" />
+      <ComboBox fx:id="cidades" layoutX="244.0" layoutY="259.0" prefWidth="150.0" promptText="Cidades" style="-fx-background-color: #f5d21f;" />
+   </children>
+</AnchorPane>

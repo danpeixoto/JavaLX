@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:controller="projeto.controller.ContoladorJAdmin" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane layoutX="-1.0" layoutY="-3.0" prefHeight="400.0" prefWidth="665.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Usuarios">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="296.0" prefWidth="600.0">
+                     <children>
+                        <TableView fx:id="usuarios" prefHeight="371.0" prefWidth="665.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="codigoUsuario" prefWidth="52.0" text="Código" />
+                              <TableColumn fx:id="nomeUsuario" prefWidth="119.0" text="Nome" />
+                              <TableColumn fx:id="email" prefWidth="182.0" text="Email" />
+                              <TableColumn fx:id="celular" minWidth="0.0" prefWidth="98.0" text="Celular" />
+                              <TableColumn fx:id="senha" prefWidth="68.0" text="Senha" />
+                              <TableColumn fx:id="cod_Cidade" editable="false" prefWidth="76.0" text="Cod_Cidade" />
+                              <TableColumn fx:id="situacaoUsuario" editable="false" prefWidth="69.0" text="Situação" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Produtos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="produtos" prefHeight="371.0" prefWidth="665.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                              <TableColumn fx:id="codigoProuto" prefWidth="52.0" text="Código" />
+                              <TableColumn fx:id="nomeProduto" prefWidth="174.0" text="Nome" />
+                              <TableColumn fx:id="descProduto" prefWidth="195.0" text="Descrição" />
+                              <TableColumn fx:id="preco" prefWidth="90.0" text="Preço" />
+                              <TableColumn fx:id="cod_Usuario" prefWidth="77.0" text="Cod_Usuario" />
+                              <TableColumn fx:id="cod_Tipo" minWidth="0.0" prefWidth="76.0" text="Cod_Tipo" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Cidades">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="cidades" prefHeight="371.0" prefWidth="665.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="codigoCidade" prefWidth="62.0" text="Código" />
+                              <TableColumn fx:id="nomeCidade" prefWidth="301.0" text="Nome" />
+                              <TableColumn fx:id="cep" minWidth="0.0" prefWidth="116.0" text="CEP" />
+                              <TableColumn fx:id="cod_Estado" prefWidth="91.0" text="Cod_Estado" />
+                              <TableColumn fx:id="situacaoCidade" prefWidth="94.0" text="Ind_Situação" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Estados">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="estados" prefHeight="371.0" prefWidth="665.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="codigoEstado" prefWidth="75.0" text="Código" />
+                              <TableColumn fx:id="nomeEstado" prefWidth="371.0" text="Nome" />
+                              <TableColumn fx:id="uf" prefWidth="126.0" text="UF" />
+                              <TableColumn fx:id="situacaoEstado" prefWidth="92.0" text="Ind_Situação" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Tipos de Produtos">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tipos" prefHeight="371.0" prefWidth="665.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="codigoTipo" prefWidth="75.0" text="Código" />
+                              <TableColumn fx:id="tipo" prefWidth="494.0" text="Tipo" />
+                              <TableColumn fx:id="situacaoTipo" maxWidth="514.0" minWidth="-1.0" prefWidth="95.0" text="Ind__Situação" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
