@@ -13,7 +13,7 @@ public class EstadoDAO implements IDAO<Estado> {
 
     private static final String ADD_ESTADO = "insert int tb_estado(nome_estado,uf_estado) values(?,?);";
     private static final String REMOVE_ESTADO = "delete from tb_estado where cod_estado= ?;";
-    private static final String UPDATE_ESTADO = "update tb_estado set nome_estado=? uf_estado=? ind_stuacao=? " +
+    private static final String UPDATE_ESTADO = "update tb_estado set nome_estado=? , uf_estado=? , ind_stuacao=? " +
             "where cod_estado=?;";
     private static final String GETALL_ESTADO = "select * from tb_estado;";
     private static final String GETBYID_ESTADO = "select * from tb_estado where cod_estado=?;";
@@ -55,8 +55,9 @@ public class EstadoDAO implements IDAO<Estado> {
             preparedStatement.setInt(1,id);//transforma o valor do id para uma string
             preparedStatement.executeUpdate();
             preparedStatement.close();
-        } catch (SQLException e) {
+        } catch (SQLException e ) {
             e.printStackTrace();
+            //SQLIntegrityConstraintViolationException já é pega pelo SQLException
         }
     }
 
@@ -105,13 +106,13 @@ public class EstadoDAO implements IDAO<Estado> {
 
     @Override
     public Estado getById(int id) {
-        Estado estadoAux = new Estado();
+        Estado estadoAux = null;
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement(GETBYID_ESTADO);
             preparedStatement.setString(1,String.valueOf(id));
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
-
+                estadoAux = new Estado();
                 estadoAux.setCodigo(resultSet.getInt(COLUNA_CODIGO));
                 estadoAux.setNome(resultSet.getString(COLUNA_NOME));
                 estadoAux.setUf(resultSet.getString(COLUNA_UF));

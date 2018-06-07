@@ -11,7 +11,7 @@ public class TipoDAO implements IDAO<TipoProduto> {
 
     private static final String ADD_TIPO = "insert into tb_tipo_produto(des_tipo) values(?);";
     private static final String REMOVE_TIPO = "delete from tb_tipo_produto where cod_tipo= ?;";
-    private static final String UPDATE_TIPO = "update tb_tipo_produto set desc_tipo=? ind_stuacao=? " +
+    private static final String UPDATE_TIPO = "update tb_tipo_produto set desc_tipo=? , ind_stuacao=? " +
             "where cod_tipo=?;";
     private static final String GETALL_TIPO = "select * from tb_tipo_produto;";
     private static final String GETBYID_TIPO = "select * from tb_tipo_produto where cod_tipo=?;";
@@ -97,7 +97,7 @@ public class TipoDAO implements IDAO<TipoProduto> {
 
     @Override
     public TipoProduto getById(int id) {
-        TipoProduto tipoBuscado = new TipoProduto();
+        TipoProduto tipoBuscado =null;
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
         try{
@@ -106,6 +106,7 @@ public class TipoDAO implements IDAO<TipoProduto> {
             resultSet = preparedStatement.executeQuery();
 
             if(resultSet.next()){
+                tipoBuscado = new TipoProduto();
                 tipoBuscado.setCodigo(resultSet.getInt(COLUNA_CODIGO));
                 tipoBuscado.setTipo(resultSet.getString(COLUNA_TIPO));
                 tipoBuscado.setSituacao(resultSet.getString(COLUNA_SITUACAO));

@@ -1,26 +1,29 @@
 package projeto.modelo;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Estado {
-    private IntegerProperty codigo;
-    private StringProperty nome;
-    private StringProperty uf;
-    private StringProperty situacao;
+    private SimpleIntegerProperty codigo = new SimpleIntegerProperty();
+    private SimpleStringProperty nome = new SimpleStringProperty();
+    private SimpleStringProperty uf = new SimpleStringProperty();;
+    private SimpleStringProperty situacao = new SimpleStringProperty();
+    /*SimpleStringProperty utilizado para facilitar o uso das variaves em tableviews*/
 
     public Estado(){}
 
-    public Estado(StringProperty nome, StringProperty uf) {
-        this.nome = nome;
-        this.uf = uf;
+    public Estado(String nome, String uf) {
+        this.nome.set(nome);
+        this.uf.set(uf);
     }
 
     public int getCodigo() {
         return codigo.get();
     }
 
-    public IntegerProperty codigoProperty() {
+    public SimpleIntegerProperty codigoProperty() {
         return codigo;
     }
 
@@ -32,7 +35,7 @@ public class Estado {
         return nome.get();
     }
 
-    public StringProperty nomeProperty() {
+    public SimpleStringProperty nomeProperty() {
         return nome;
     }
 
@@ -44,7 +47,7 @@ public class Estado {
         return uf.get();
     }
 
-    public StringProperty ufProperty() {
+    public SimpleStringProperty ufProperty() {
         return uf;
     }
 
@@ -56,7 +59,7 @@ public class Estado {
         return situacao.get();
     }
 
-    public StringProperty situacaoProperty() {
+    public SimpleStringProperty situacaoProperty() {
         return situacao;
     }
 

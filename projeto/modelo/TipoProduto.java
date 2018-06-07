@@ -1,17 +1,19 @@
 package projeto.modelo;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class TipoProduto {
 
-    private IntegerProperty codigo;
-    private StringProperty tipo;
-    private StringProperty situacao;
+    private SimpleIntegerProperty codigo = new SimpleIntegerProperty();
+    private SimpleStringProperty tipo = new SimpleStringProperty();
+    private SimpleStringProperty situacao = new SimpleStringProperty();
 
     public TipoProduto(){}
 
-    public TipoProduto(StringProperty tipo) {
+    public TipoProduto(SimpleStringProperty tipo) {
         this.tipo = tipo;
     }
 
@@ -19,7 +21,7 @@ public class TipoProduto {
         return codigo.get();
     }
 
-    public IntegerProperty codigoProperty() {
+    public SimpleIntegerProperty codigoProperty() {
         return codigo;
     }
 
@@ -31,7 +33,7 @@ public class TipoProduto {
         return tipo.get();
     }
 
-    public StringProperty tipoProperty() {
+    public SimpleStringProperty tipoProperty() {
         return tipo;
     }
 
@@ -43,7 +45,7 @@ public class TipoProduto {
         return situacao.get();
     }
 
-    public StringProperty situacaoProperty() {
+    public SimpleStringProperty situacaoProperty() {
         return situacao;
     }
 

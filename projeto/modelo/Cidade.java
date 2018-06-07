@@ -1,40 +1,47 @@
 package projeto.modelo;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
+import java.util.Objects;
 
 public class Cidade {
 
-    private StringProperty nome;
-    private StringProperty cep;
-    private IntegerProperty codigo;
+    private SimpleStringProperty nome = new SimpleStringProperty();
+    private SimpleStringProperty cep = new SimpleStringProperty();
+    private SimpleIntegerProperty codigo = new SimpleIntegerProperty();
     private Estado estado;
-    private StringProperty situacao;
+    private SimpleStringProperty situacao = new SimpleStringProperty();
 
-    public Cidade(StringProperty nome, StringProperty cep, Estado estado) {
+    public Cidade(){}
+
+    public Cidade(SimpleStringProperty nome, SimpleStringProperty cep, Estado estado) {
         this.nome = nome;
         this.cep = cep;
         this.estado = estado;
     }
 
-    public Cidade(){}
-    public String getSituacao() {
-        return situacao.get();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cidade)) return false;
+        Cidade cidade = (Cidade) o;
+        return Objects.equals(cep, cidade.cep);
     }
 
-    public StringProperty situacaoProperty() {
-        return situacao;
-    }
+    @Override
+    public int hashCode() {
 
-    public void setSituacao(String situacao) {
-        this.situacao.set(situacao);
+        return Objects.hash(cep);
     }
 
     public String getNome() {
         return nome.get();
     }
 
-    public StringProperty nomeProperty() {
+    public SimpleStringProperty nomeProperty() {
         return nome;
     }
 
@@ -46,7 +53,7 @@ public class Cidade {
         return cep.get();
     }
 
-    public StringProperty cepProperty() {
+    public SimpleStringProperty cepProperty() {
         return cep;
     }
 
@@ -58,7 +65,7 @@ public class Cidade {
         return codigo.get();
     }
 
-    public IntegerProperty codigoProperty() {
+    public SimpleIntegerProperty codigoProperty() {
         return codigo;
     }
 
@@ -72,5 +79,17 @@ public class Cidade {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+
+    public String getSituacao() {
+        return situacao.get();
+    }
+
+    public SimpleStringProperty situacaoProperty() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao.set(situacao);
     }
 }

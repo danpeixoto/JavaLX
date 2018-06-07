@@ -42,6 +42,8 @@ public class LoginDAO {
             if(resultSet.next()){
                 if(resultSet.getString(COLUNA_SITUACAO).equals("A")){
                     usuarioExiste = true;
+                    email = resultSet.getString(COLUNA_EMAIL);
+                    senha = resultSet.getString(COLUNA_SENHA);
                 }
             }
             resultSet.close();
