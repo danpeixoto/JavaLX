@@ -23,8 +23,8 @@ public class TipoDAO implements IDAO<TipoProduto> {
 
     private Connection conexao;
 
-    public TipoDAO(){
-        this.conexao = DbConnection.getConexao();
+    public TipoDAO(Connection connection) {
+        this.conexao = connection;
     }
 
     @Override
@@ -98,12 +98,12 @@ public class TipoDAO implements IDAO<TipoProduto> {
     @Override
     public TipoProduto getById(int id) {
         TipoProduto tipoBuscado =null;
-        ResultSet resultSet = null;
-        PreparedStatement preparedStatement = null;
+
         try{
-            preparedStatement = conexao.prepareStatement(GETBYID_TIPO);
+            PreparedStatement preparedStatement = conexao.prepareStatement(GETBYID_TIPO);
             preparedStatement.setInt(1,id);
-            resultSet = preparedStatement.executeQuery();
+
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             if(resultSet.next()){
                 tipoBuscado = new TipoProduto();

@@ -25,8 +25,8 @@ public class EstadoDAO implements IDAO<Estado> {
     private static final String COLUNA_SITUACAO = "ind_situacao";
 
 
-    public EstadoDAO() {
-        this.conexao = DbConnection.getConexao();
+    public EstadoDAO(Connection connection) {
+        this.conexao = connection;
     }
 
     @Override

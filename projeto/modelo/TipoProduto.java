@@ -21,6 +21,11 @@ public class TipoProduto {
         return codigo.get();
     }
 
+    @Override
+    public String toString() {
+        return getTipo();
+    }
+
     public SimpleIntegerProperty codigoProperty() {
         return codigo;
     }

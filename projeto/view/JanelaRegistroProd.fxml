@@ -15,7 +15,7 @@
             <Font name="Arial" size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="cadastrarBnt" layoutX="41.0" layoutY="241.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="351.0" style="-fx-background-color: #61b876;" text=" Cadastrar Produto" textFill="WHITE">
+      <Button fx:id="cadastrarBnt" layoutX="41.0" layoutY="241.0" mnemonicParsing="false" onAction="#gerarNovoPodruto" prefHeight="53.0" prefWidth="351.0" style="-fx-background-color: #61b876;" text=" Cadastrar Produto" textFill="WHITE">
          <font>
             <Font name="Arial" size="33.0" />
          </font>
@@ -28,6 +28,11 @@
       <TextArea fx:id="descProduto" layoutX="43.0" layoutY="90.0" prefHeight="37.0" prefWidth="351.0" promptText="Descrição do Produto" style="-fx-background-color: grey; -fx-prompt-text-fill: #61b876;" />
       <Button fx:id="imagemPicker" layoutX="49.0" layoutY="204.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #f5d21f;" text="Imagem " />
       <Label fx:id="pathImg" layoutX="185.0" layoutY="208.0" prefHeight="17.0" prefWidth="203.0" text="path" textFill="#61b876" />
-      <ComboBox layoutX="248.0" layoutY="139.0" prefHeight="47.0" prefWidth="146.0" promptText="Tipos" style="-fx-background-color: #f5d21f;" />
+      <ComboBox fx:id="tiposBox" layoutX="248.0" layoutY="139.0" prefHeight="47.0" prefWidth="146.0" promptText="Tipos" style="-fx-background-color: #f5d21f;" />
+      <Label fx:id="erroLabel" alignment="CENTER" layoutX="43.0" layoutY="2.0" prefHeight="17.0" prefWidth="351.0" text="Erro nos dados do Cadastro" textFill="#c30101" visible="false">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -8,7 +8,7 @@ import javafx.beans.property.StringProperty;
 public class Estado {
     private SimpleIntegerProperty codigo = new SimpleIntegerProperty();
     private SimpleStringProperty nome = new SimpleStringProperty();
-    private SimpleStringProperty uf = new SimpleStringProperty();;
+    private SimpleStringProperty uf = new SimpleStringProperty();
     private SimpleStringProperty situacao = new SimpleStringProperty();
     /*SimpleStringProperty utilizado para facilitar o uso das variaves em tableviews*/
 
@@ -65,5 +65,10 @@ public class Estado {
 
     public void setSituacao(String situacao) {
         this.situacao.set(situacao);
+    }
+
+    @Override
+    public String toString() {
+        return getUf();
     }
 }

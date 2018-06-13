@@ -5,15 +5,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+import projeto.dao.CidadeDAO;
 import projeto.dao.EstadoDAO;
+import projeto.dao.UsuarioDAO;
 import projeto.modelo.Cidade;
 import projeto.modelo.Estado;
+import projeto.modelo.Usuario;
+import projeto.servicos.DbConnection;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -24,7 +27,7 @@ public class ControladorJanelaCadastro implements Initializable {
     private TextField nomeUsuario;
 
     @FXML
-    private PasswordField senhaUsurio;
+    private PasswordField senhaUsuario;
 
     @FXML
     private Button cadastrarBnt;
@@ -36,20 +39,55 @@ public class ControladorJanelaCadastro implements Initializable {
     private TextField celUsuario;
 
     @FXML
-    private ComboBox<String> estados;
+    private ComboBox<Estado> estados;
 
     @FXML
-    private ComboBox<String> cidades;
+    private ComboBox<Cidade> cidades;
 
+    @FXML
+    private Label erroLabel;
+
+    private Connection connection;
+    private List<Estado> estadoList;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        EstadoDAO estadoDAO = new EstadoDAO();
-        ObservableList<String> olEstados = FXCollections.observableArrayList();
-        List<Estado> estadoAux = estadoDAO.getAll();
-        for(Estado e : estadoAux){
-            olEstados.add(e.getUf());
+        connection = DbConnection.getConexao();
+        EstadoDAO estadoDAO = new EstadoDAO(connection);
+        ObservableList<Estado> observableList = FXCollections.observableArrayList();
+        estadoList = estadoDAO.getAll();
+        for(Estado e : estadoList){
+            observableList.add(e);
         }
-        estados.setItems(olEstados);//popula esta combobox com as uf dos estados que estao presentes no bd
+        estados.setItems(observableList);//popula esta combobox com as uf dos estados que estao presentes no bd
+    }
+
+
+    public void gerarCidades(){
+        CidadeDAO cidadeDAO = new CidadeDAO(connection);
+        List<Cidade> cidadeList = cidadeDAO.getByEstado(estados.getSelectionModel().getSelectedItem());
+        ObservableList<Cidade> observableList = FXCollections.observableArrayList();
+
+        for (Cidade c : cidadeList){
+            observableList.add(c);
+        }
+        cidades.setItems(observableList);
+    }
+
+    public void gerarCadastro(){
+        String usr = nomeUsuario.getText().trim().toUpperCase();
+        String pass = senhaUsuario.getText().trim();
+        String email = emailUsuario.getText().trim();
+        String cel = celUsuario.getText().trim();
+        Cidade cidade = cidades.getSelectionModel().getSelectedItem();
+        if( (usr != null) && (pass != null) &&(email != null) && (cel != null)
+                &&  cidade != null ){
+            UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+            usuarioDAO.add(new Usuario(usr,email,cel,pass,cidade));
+            Stage stage = (Stage) cadastrarBnt.getScene().getWindow();
+            stage.close();
+        }else{
+            erroLabel.setVisible(true);
+        }
+
     }
 }

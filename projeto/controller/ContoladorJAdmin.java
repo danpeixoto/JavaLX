@@ -1,10 +1,24 @@
 package projeto.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import projeto.dao.EstadoDAO;
+import projeto.dao.ProdutoDAO;
+import projeto.modelo.Estado;
+import projeto.modelo.Produto;
+import projeto.servicos.DbConnection;
 
-public class ContoladorJAdmin {
+import java.net.URL;
+import java.sql.Connection;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class ContoladorJAdmin implements Initializable {
 
     @FXML
     private TableView<?> usuarios;
@@ -31,13 +45,13 @@ public class ContoladorJAdmin {
     private TableColumn<?, ?> situacaoUsuario;
 
     @FXML
-    private TableView<?> produtos;
+    private TableView<Produto> produtos;
 
     @FXML
     private TableColumn<?, ?> codigoProuto;
 
     @FXML
-    private TableColumn<?, ?> nomeProduto;
+    private TableColumn<Produto, String> nomeProduto;
 
     @FXML
     private TableColumn<?, ?> descProduto;
@@ -70,19 +84,19 @@ public class ContoladorJAdmin {
     private TableColumn<?, ?> situacaoCidade;
 
     @FXML
-    private TableView<?> estados;
+    private TableView<Estado> estados;
 
     @FXML
-    private TableColumn<?, ?> codigoEstado;
+    private TableColumn<Estado, Integer> codigoEstado;
 
     @FXML
-    private TableColumn<?, ?> nomeEstado;
+    private TableColumn<Estado, String> nomeEstado;
 
     @FXML
-    private TableColumn<?, ?> uf;
+    private TableColumn<Estado, String> uf;
 
     @FXML
-    private TableColumn<?, ?> situacaoEstado;
+    private TableColumn<Estado, String> situacaoEstado;
 
     @FXML
     private TableView<?> tipos;
@@ -95,4 +109,36 @@ public class ContoladorJAdmin {
 
     @FXML
     private TableColumn<?, ?> situacaoTipo;
+
+    private Connection conexao;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        conexao = DbConnection.getConexao();
+        EstadoDAO estadoDAO = new EstadoDAO(conexao);
+        List<Estado> estadoss = estadoDAO.getAll();
+        ObservableList<Estado> list = FXCollections.observableArrayList();
+
+        for(Estado e : estadoss){
+            list.add(e);
+        }
+        codigoEstado.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+        nomeEstado.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        uf.setCellValueFactory(new PropertyValueFactory<>("uf"));
+        situacaoEstado.setCellValueFactory(new PropertyValueFactory<>("situacao"));
+
+        estados.setItems(list);
+
+        ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
+        List<Produto> listaProdutos = produtoDAO.getAll();
+        ObservableList<Produto> list1 ;
+        list1 = FXCollections.observableArrayList();
+
+        for(Produto p  : listaProdutos){
+            list1.add(p);
+        }
+        nomeProduto.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        produtos.setItems(list1);
+
+    }
 }

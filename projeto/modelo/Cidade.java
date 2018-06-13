@@ -92,4 +92,9 @@ public class Cidade {
     public void setSituacao(String situacao) {
         this.situacao.set(situacao);
     }
+
+    @Override
+    public String toString() {
+        return getNome();
+    }
 }

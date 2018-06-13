@@ -1,44 +1,55 @@
 package projeto.modelo;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.Objects;
+
 public class Usuario {
-    private IntegerProperty codigo;
-    private StringProperty nome;
-    private StringProperty email;
-    private StringProperty celular;
-    private StringProperty senha;
+    private SimpleIntegerProperty codigo = new SimpleIntegerProperty();
+    private SimpleStringProperty nome = new SimpleStringProperty();
+    private SimpleStringProperty email = new SimpleStringProperty();
+    private SimpleStringProperty celular = new SimpleStringProperty();
+    private SimpleStringProperty senha = new SimpleStringProperty();
+    private SimpleStringProperty situacao = new SimpleStringProperty();
     private Cidade cidade;
-    private StringProperty situacao;
 
     public Usuario(){}
 
-    public Usuario(StringProperty nome, StringProperty email, StringProperty celular, StringProperty senha, Cidade cidade) {
-        this.nome = nome;
-        this.email = email;
-        this.celular = celular;
-        this.senha = senha;
+    public Usuario(String nome, String email, String celular, String senha , Cidade cidade) {
+        this.nome.set(nome);
+        this.email.set(email);
+        this.celular.set(celular);
+        this.senha.set(senha);
         this.cidade = cidade;
     }
 
-    public String getSituacao() {
-        return situacao.get();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Usuario)) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(email, usuario.email);
     }
 
-    public StringProperty situacaoProperty() {
-        return situacao;
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(email);
     }
 
-    public void setSituacao(String situacao) {
-        this.situacao.set(situacao);
+    @Override
+    public String toString() {
+        return getNome();
     }
 
     public int getCodigo() {
         return codigo.get();
     }
 
-    public IntegerProperty codigoProperty() {
+    public SimpleIntegerProperty codigoProperty() {
         return codigo;
     }
 
@@ -50,7 +61,7 @@ public class Usuario {
         return nome.get();
     }
 
-    public StringProperty nomeProperty() {
+    public SimpleStringProperty nomeProperty() {
         return nome;
     }
 
@@ -62,7 +73,7 @@ public class Usuario {
         return email.get();
     }
 
-    public StringProperty emailProperty() {
+    public SimpleStringProperty emailProperty() {
         return email;
     }
 
@@ -74,7 +85,7 @@ public class Usuario {
         return celular.get();
     }
 
-    public StringProperty celularProperty() {
+    public SimpleStringProperty celularProperty() {
         return celular;
     }
 
@@ -86,12 +97,24 @@ public class Usuario {
         return senha.get();
     }
 
-    public StringProperty senhaProperty() {
+    public SimpleStringProperty senhaProperty() {
         return senha;
     }
 
     public void setSenha(String senha) {
         this.senha.set(senha);
+    }
+
+    public String getSituacao() {
+        return situacao.get();
+    }
+
+    public SimpleStringProperty situacaoProperty() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao.set(situacao);
     }
 
     public Cidade getCidade() {

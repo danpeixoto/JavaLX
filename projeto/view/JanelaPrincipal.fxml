@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -9,14 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:controller="projeto.controller.ControladorJPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ControladorJPrincipal">
    <children>
       <AnchorPane prefHeight="105.0" prefWidth="600.0" style="-fx-background-color: #61b876;">
          <children>
             <TextField fx:id="buscaField" layoutX="14.0" layoutY="26.0" promptText="Buscar" style="-fx-background-color: white; -fx-prompt-text-fill: #489f81; -fx-text-fill: #61b876;" />
             <ComboBox fx:id="buscaBox" layoutX="174.0" layoutY="26.0" prefHeight="25.0" prefWidth="78.0" promptText="Busca" style="-fx-background-color: white;" />
             <Button fx:id="buscaBnt" layoutX="259.0" layoutY="26.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Buscar" textFill="#489f81" />
-            <Button fx:id="novoProdutoBnt" layoutX="352.0" layoutY="24.0" mnemonicParsing="false" onAction="#gerarNovoProduto" style="-fx-background-color: #f5d21f;" text="Novo Produto" textFill="WHITE">
+            <Button fx:id="novoProdutoBnt" layoutX="348.0" layoutY="24.0" mnemonicParsing="false" onAction="#gerarJanelaNovoProduto" style="-fx-background-color: #f5d21f;" text="Novo Produto" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
@@ -26,15 +27,14 @@
                   <Font size="14.0" />
                </font>
             </Button>
+            <Label layoutX="219.0" layoutY="6.0" text="Precione F5 para atualizar a tabela" textFill="WHITE" />
          </children>
       </AnchorPane>
-      <TableView fx:id="tableView" editable="true" fixedCellSize="1.0" prefHeight="352.0" prefWidth="600.0" style="-fx-background-color: white;">
+      <TableView fx:id="tabelaProdutos" onKeyPressed="#atualizar" prefHeight="380.0" prefWidth="600.0" style="-fx-background-color: white;">
         <columns>
-          <TableColumn fx:id="imagem" editable="false" prefWidth="111.0" text="Imagem" />
-          <TableColumn fx:id="nome" editable="false" prefWidth="131.0" text="Nome" />
-            <TableColumn fx:id="vendedor" editable="false" prefWidth="134.0" text="Vendedor" />
-            <TableColumn fx:id="contato" editable="false" minWidth="0.0" prefWidth="125.0" text="Contato" />
-            <TableColumn fx:id="cidade" editable="false" prefWidth="98.0" text="Cidade" />
+          <TableColumn fx:id="nomeCol" editable="false" prefWidth="228.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="vendedorCol" editable="false" prefWidth="209.0" resizable="false" text="Vendedor" />
+            <TableColumn fx:id="tipoCol" editable="false" prefWidth="162.0" resizable="false" text="Tipo" />
         </columns>
       </TableView>
    </children>

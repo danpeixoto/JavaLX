@@ -1,34 +1,50 @@
 package projeto.modelo;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import projeto.dao.TipoDAO;
 
 import java.sql.Blob;
+import java.util.Objects;
 
 public class Produto {
-    private IntegerProperty codigo;
-    private StringProperty nome;
-    private StringProperty descricao;
-    private DoubleProperty preco;
+    private SimpleIntegerProperty codigo = new SimpleIntegerProperty();
+    private StringProperty nome = new SimpleStringProperty();
+    private StringProperty descricao = new SimpleStringProperty();
+    private SimpleDoubleProperty preco = new SimpleDoubleProperty();
     private Blob imagem;
     private TipoProduto tipo;
     private Usuario usuario;
 
     public Produto(){}
 
+    public Produto(String nome, String descricao, String preco , Usuario usuario , TipoProduto tipo) {
+        this.nome.setValue(nome);
+        this.descricao.setValue(descricao);
+        this.preco.setValue(Double.parseDouble(preco));
+        this.usuario = usuario;
+        this.tipo = tipo;
+    }
 
-    public Produto(StringProperty nome, StringProperty descricao, DoubleProperty preco) {
-        this.nome = nome;
-        this.descricao = descricao;
-        this.preco = preco;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Produto)) return false;
+        Produto produto = (Produto) o;
+        return Objects.equals(codigo, produto.codigo);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(codigo);
     }
 
     public int getCodigo() {
         return codigo.get();
     }
 
-    public IntegerProperty codigoProperty() {
+    public SimpleIntegerProperty codigoProperty() {
         return codigo;
     }
 
@@ -40,9 +56,9 @@ public class Produto {
         return nome.get();
     }
 
-    public StringProperty nomeProperty() {
-        return nome;
-    }
+//    public StringProperty nomeProperty() {
+//        return nome;
+//    }
 
     public void setNome(String nome) {
         this.nome.set(nome);
@@ -64,7 +80,7 @@ public class Produto {
         return preco.get();
     }
 
-    public DoubleProperty precoProperty() {
+    public SimpleDoubleProperty precoProperty() {
         return preco;
     }
 

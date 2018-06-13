@@ -9,8 +9,8 @@ import java.sql.SQLException;
 
 public class LoginDAO {
     private Connection conexao;
-    private static String email;
-    private static String senha;
+    private static String emailUsuario;
+    private static String senhaUsuario;
 
     private static final String LOGIN_USUARIO = "select * from tb_usuario where email_usuario=? and senha_usuario=?;";
     private static final String COLUNA_EMAIL = "email_usuario";
@@ -22,11 +22,11 @@ public class LoginDAO {
     }
 
     public static String getEmail() {
-        return email;
+        return emailUsuario;
     }
 
     public static String getSenha() {
-        return senha;
+        return senhaUsuario;
     }
 
     public boolean loginAceito(String email, String senha) {
@@ -42,8 +42,8 @@ public class LoginDAO {
             if(resultSet.next()){
                 if(resultSet.getString(COLUNA_SITUACAO).equals("A")){
                     usuarioExiste = true;
-                    email = resultSet.getString(COLUNA_EMAIL);
-                    senha = resultSet.getString(COLUNA_SENHA);
+                    emailUsuario = resultSet.getString(COLUNA_EMAIL);
+                    senhaUsuario = resultSet.getString(COLUNA_SENHA);
                 }
             }
             resultSet.close();

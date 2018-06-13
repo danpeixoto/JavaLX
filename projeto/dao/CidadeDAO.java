@@ -4,7 +4,10 @@ import projeto.modelo.Cidade;
 import projeto.modelo.Estado;
 import projeto.servicos.DbConnection;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +19,7 @@ public class CidadeDAO implements IDAO<Cidade> {
     private static final String REMOVE_CIDADE = "delete from tb_cidade where cod_cidade= ?;";
     private static final String UPDATE_CIDADE = "update tb_cidade set nome_cidade=? , cep_cidade=? , ind_stuacao=? " +
             "where cod_tipo=?;";
-    private static final String GETALL_CIDADE = "select * from tb_cidade where cod_estado = ?;";
+    private static final String GETALL_CIDADE_BY_ESTADO = "select * from tb_cidade where cod_estado = ?;";
     private static final String GETBYID_TIPO = "select * from tb_cidade where cod_cidade=?;";
 
 
@@ -29,8 +32,8 @@ public class CidadeDAO implements IDAO<Cidade> {
 
     private Connection conexao;
 
-    public CidadeDAO() {
-        this.conexao = DbConnection.getConexao();
+    public CidadeDAO(Connection connection) {
+        this.conexao = connection;
     }
 
     @Override
@@ -74,9 +77,9 @@ public class CidadeDAO implements IDAO<Cidade> {
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement(UPDATE_CIDADE);
 
-            preparedStatement.setString(1,cidade.getNome().toUpperCase());
-            preparedStatement.setString(2,cidade.getCep());
-            preparedStatement.setString(3,cidade.getSituacao().toUpperCase());
+            preparedStatement.setString(1, cidade.getNome().toUpperCase());
+            preparedStatement.setString(2, cidade.getCep());
+            preparedStatement.setString(3, cidade.getSituacao().toUpperCase());
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -89,16 +92,17 @@ public class CidadeDAO implements IDAO<Cidade> {
     public List<Cidade> getAll() {
         List<Cidade> cidades = new ArrayList<>();
 
-        try{
-            PreparedStatement preparedStatement = conexao.prepareStatement(GETALL_CIDADE);
-            EstadoDAO estadoDAO = new EstadoDAO();
-            List<Estado> estados = estadoDAO.getAll();
+        try {
 
-            for(Estado e : estados){
-                preparedStatement.setInt(1,e.getCodigo());
+            EstadoDAO estadoDAO = new EstadoDAO(conexao);
+            List<Estado> estados = estadoDAO.getAll();
+            PreparedStatement preparedStatement = conexao.prepareStatement(GETALL_CIDADE_BY_ESTADO);
+
+            for (Estado e : estados) {
+                preparedStatement.setInt(1, e.getCodigo());
                 ResultSet resultSet = preparedStatement.executeQuery();
 
-                while (resultSet.next()){
+                while (resultSet.next()) {
                     Cidade cidadeAux = new Cidade();
 
                     cidadeAux.setCodigo(resultSet.getInt(COLUNA_CODIGO));
@@ -111,9 +115,7 @@ public class CidadeDAO implements IDAO<Cidade> {
                 }
 
                 resultSet.close();
-
             }
-
             preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -122,19 +124,47 @@ public class CidadeDAO implements IDAO<Cidade> {
         return cidades;
     }
 
+    public List<Cidade> getByEstado(Estado estado) {
+        List<Cidade> cidades = new ArrayList<>();
+
+        try {
+            PreparedStatement preparedStatement = conexao.prepareStatement(GETALL_CIDADE_BY_ESTADO);
+            preparedStatement.setInt(1, estado.getCodigo());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Cidade cidadeAux = new Cidade();
+
+                cidadeAux.setCodigo(resultSet.getInt(COLUNA_CODIGO));
+                cidadeAux.setNome(resultSet.getString(COLUNA_NOME));
+                cidadeAux.setCep(resultSet.getString(COLUNA_CEP));
+                cidadeAux.setSituacao(resultSet.getString(COLUNA_SITUACAO));
+                cidadeAux.setEstado(estado);
+
+                cidades.add(cidadeAux);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cidades;
+    }
+
     @Override
     public Cidade getById(int id) {
-        Cidade cidadeBuscada = null ;
+        Cidade cidadeBuscada = null;
 
-        try{
+        try {
             PreparedStatement preparedStatement = conexao.prepareStatement(GETBYID_TIPO);
 
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if(resultSet.next()){
-                EstadoDAO estadoDAO = new EstadoDAO();
+            if (resultSet.next()) {
+                EstadoDAO estadoDAO = new EstadoDAO(conexao);
                 Estado estadoAux = estadoDAO.getById(resultSet.getInt(COLUNA_CODIGO_ESTADO));
 
                 cidadeBuscada = new Cidade();
@@ -148,7 +178,7 @@ public class CidadeDAO implements IDAO<Cidade> {
             resultSet.close();
             preparedStatement.close();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
