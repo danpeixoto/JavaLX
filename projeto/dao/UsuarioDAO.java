@@ -19,6 +19,7 @@ public class UsuarioDAO implements IDAO<Usuario>{
             "where cod_usuario=?;";
     private static final String GETALL_USUARIOS_BY_CIDADE = "select * from tb_usuario where cod_cidade=?;";
     private static final String GET_USUARIO_BY_SENHA_EMAIL ="select * from tb_usuario where email_usuario=? and senha_usuario=?;";
+    private static final String GETALL_USUARIO_BY_NOME = "select * from tb_usuario where nome_usuario=?;";
     private static final String GETBYID_USUARIO = "select * from tb_usuario where cod_usuario=?;";
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,7 +41,7 @@ public class UsuarioDAO implements IDAO<Usuario>{
         try{
             PreparedStatement preparedStatement = conexao.prepareStatement(ADD_USUARIO);
 
-            preparedStatement.setString(1,usuario.getNome());
+            preparedStatement.setString(1,usuario.getNome().toUpperCase());
             preparedStatement.setString(2,usuario.getEmail());
             preparedStatement.setString(3,usuario.getCelular());
             preparedStatement.setString(4,usuario.getSenha());
@@ -79,7 +80,7 @@ public class UsuarioDAO implements IDAO<Usuario>{
         try{
             PreparedStatement preparedStatement = conexao.prepareStatement(UPDATE_USUARIO);
 
-            preparedStatement.setString(1,usuario.getNome());
+            preparedStatement.setString(1,usuario.getNome().toUpperCase());
             preparedStatement.setString(2,usuario.getEmail());
             preparedStatement.setString(3,usuario.getCelular());
             preparedStatement.setString(4,usuario.getSenha());
@@ -159,6 +160,8 @@ public class UsuarioDAO implements IDAO<Usuario>{
                 usuarioBuscado.setCidade(cidade);
 
             }
+            resultSet.close();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -191,10 +194,46 @@ public class UsuarioDAO implements IDAO<Usuario>{
                 usuarioBuscado.setCidade(cidade);
 
             }
+            resultSet.close();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return usuarioBuscado;
+    }
+
+    public List<Usuario> getUsuarioByNome(String nome){
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try{
+            PreparedStatement preparedStatement = conexao.prepareStatement(GETALL_USUARIO_BY_NOME);
+
+            preparedStatement.setString(1,nome);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                Usuario usuarioAux = new Usuario();
+                CidadeDAO cidadeDAO = new CidadeDAO(conexao);
+                Cidade cidade = cidadeDAO.getById(resultSet.getInt(COLUNA_CODIGO_CIDADE));
+
+                usuarioAux.setNome(resultSet.getString(COLUNA_NOME));
+                usuarioAux.setEmail(resultSet.getString(COlUNA_EMAIL));
+                usuarioAux.setCelular(resultSet.getString(COLUNA_CELULAR));
+                usuarioAux.setSenha(resultSet.getString(COlUNA_SENHA));
+                usuarioAux.setSituacao(resultSet.getString(COLUNA_SITUACAO));
+                usuarioAux.setCodigo(resultSet.getInt(COLUNA_CODIGO));
+                usuarioAux.setCidade(cidade);
+
+                usuarios.add(usuarioAux);
+            }
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return usuarios;
     }
 }

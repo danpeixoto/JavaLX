@@ -41,7 +41,7 @@ public class CidadeDAO implements IDAO<Cidade> {
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement(ADD_CIDADE);
 
-            preparedStatement.setString(1, cidade.getEstado().getNome());
+            preparedStatement.setString(1, cidade.getEstado().getNome().toUpperCase());
             preparedStatement.setString(2, cidade.getNome().toUpperCase());
             preparedStatement.setString(3, cidade.getCep());
 

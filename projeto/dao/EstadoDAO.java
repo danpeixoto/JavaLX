@@ -33,8 +33,8 @@ public class EstadoDAO implements IDAO<Estado> {
     public void add(Estado estado) {
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement(ADD_ESTADO);
-            preparedStatement.setString(1,estado.getNome());
-            preparedStatement.setString(2,estado.getUf());
+            preparedStatement.setString(1,estado.getNome().toUpperCase());
+            preparedStatement.setString(2,estado.getUf().toUpperCase());
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {
@@ -66,10 +66,10 @@ public class EstadoDAO implements IDAO<Estado> {
         try{
             PreparedStatement preparedStatement = conexao.prepareStatement(UPDATE_ESTADO);
 
-            preparedStatement.setString(1, estado.getNome());
-            preparedStatement.setString(2, estado.getUf());
-            preparedStatement.setString(3, estado.getSituacao());
-            preparedStatement.setString(4, String.valueOf(estado.getCodigo()));
+            preparedStatement.setString(1, estado.getNome().toUpperCase());
+            preparedStatement.setString(2, estado.getUf().toUpperCase());
+            preparedStatement.setString(3, estado.getSituacao().toUpperCase());
+            preparedStatement.setInt(4, estado.getCodigo());
             preparedStatement.executeUpdate();
             preparedStatement.close();
 

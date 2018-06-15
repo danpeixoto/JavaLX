@@ -55,8 +55,7 @@ public class ControladorJRegistroProd implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         connection = DbConnection.getConexao();
-        UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
-        usuario = usuarioDAO.getUsuarioByEmailSenha(LoginDAO.getEmail(), LoginDAO.getSenha());
+        usuario = ControladorJPrincipal.usuarioAtual;
         carregarTipos();
     }
 

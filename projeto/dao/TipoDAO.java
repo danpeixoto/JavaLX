@@ -31,7 +31,7 @@ public class TipoDAO implements IDAO<TipoProduto> {
     public void add(TipoProduto tipoProduto) {
         try{
             PreparedStatement preparedStatement = conexao.prepareStatement(ADD_TIPO);
-            preparedStatement.setString(1,tipoProduto.getTipo());
+            preparedStatement.setString(1,tipoProduto.getTipo().toUpperCase());
             preparedStatement.executeUpdate();
             preparedStatement.close();
         }catch (SQLException e){
@@ -61,8 +61,8 @@ public class TipoDAO implements IDAO<TipoProduto> {
         try{
             PreparedStatement preparedStatement = conexao.prepareStatement(UPDATE_TIPO);
 
-            preparedStatement.setString(1,tipoProduto.getTipo());
-            preparedStatement.setString(2,tipoProduto.getSituacao());
+            preparedStatement.setString(1,tipoProduto.getTipo().toUpperCase());
+            preparedStatement.setString(2,tipoProduto.getSituacao().toUpperCase());
             preparedStatement.setInt(3,tipoProduto.getCodigo());
             preparedStatement.executeUpdate();
             preparedStatement.close();
