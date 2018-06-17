@@ -176,7 +176,10 @@ public class ControladorJPrincipal implements Initializable{
                 modificarMenu.setOnAction(e->modificarProduto(produto));
 
                 contextMenu.getItems().setAll(deletarMenu , modificarMenu);
-                contextMenu.show(tabelaProdutos.getScene().getWindow());
+                contextMenu.show(tabelaProdutos.getScene().getWindow());//define o contextMenu quando esta mostrando
+                //os produtos do usuario atual , se usasse "tabelaProdutos.setContextMenu(contextMenu);"
+                //iria bugar porque iria mostrar o menu independente do lugar , mas usando o .show só mostra ele
+                //e não gera o bug
             }
 
 

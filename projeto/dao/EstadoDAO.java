@@ -11,9 +11,9 @@ public class EstadoDAO implements IDAO<Estado> {
 
     private Connection conexao;
 
-    private static final String ADD_ESTADO = "insert int tb_estado(nome_estado,uf_estado) values(?,?);";
+    private static final String ADD_ESTADO = "insert into tb_estado(nome_estado,uf_estado) values(?,?);";
     private static final String REMOVE_ESTADO = "delete from tb_estado where cod_estado= ?;";
-    private static final String UPDATE_ESTADO = "update tb_estado set nome_estado=? , uf_estado=? , ind_stuacao=? " +
+    private static final String UPDATE_ESTADO = "update tb_estado set nome_estado=? , uf_estado=? , ind_situacao=? " +
             "where cod_estado=?;";
     private static final String GETALL_ESTADO = "select * from tb_estado;";
     private static final String GETBYID_ESTADO = "select * from tb_estado where cod_estado=?;";

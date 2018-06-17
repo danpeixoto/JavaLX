@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import projeto.dao.LoginDAO;
@@ -40,6 +37,12 @@ public class ControldorJanelaLogin implements Initializable {
 
         try{
             if((entradaUsuario.getText().equals("admin")) && (entradaSenha.getText().equals("admin"))){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Cuidado");
+                alert.setHeaderText("Você esta prestes a entrer numa area perigosa.");
+                alert.setContentText("Com grandes poderes vêm grandes responsabilidades. Todas as tabelas estão em cascade.");
+
+                alert.showAndWait();
                 Stage stage = (Stage) loginBnt.getScene().getWindow();
                 stage.close();
                 mudarJanelaAdmin();

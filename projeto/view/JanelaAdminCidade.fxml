@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="322.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ControladorJAdminCidade">
+   <children>
+      <Label layoutX="58.0" layoutY="26.0" text="Cidade:" />
+      <Label layoutX="67.0" layoutY="91.0" text="CEP:" />
+      <TextField fx:id="cidadeField" layoutX="115.0" layoutY="22.0" />
+      <TextField fx:id="cepField" layoutX="115.0" layoutY="87.0" />
+   </children>
+</AnchorPane>

@@ -17,8 +17,8 @@ public class CidadeDAO implements IDAO<Cidade> {
     private static final String ADD_CIDADE = "insert into tb_cidade(cod_estado , nome_cidade , cep_cidade) " +
             "values((select cod_estado from tb_estado where nome_estado=?),?,?);";
     private static final String REMOVE_CIDADE = "delete from tb_cidade where cod_cidade= ?;";
-    private static final String UPDATE_CIDADE = "update tb_cidade set nome_cidade=? , cep_cidade=? , ind_stuacao=? " +
-            "where cod_tipo=?;";
+    private static final String UPDATE_CIDADE = "update tb_cidade set nome_cidade=? , cep_cidade=? , ind_situacao=? " +
+            "where cod_cidade=?;";
     private static final String GETALL_CIDADE_BY_ESTADO = "select * from tb_cidade where cod_estado = ?;";
     private static final String GETBYID_TIPO = "select * from tb_cidade where cod_cidade=?;";
 
@@ -80,6 +80,7 @@ public class CidadeDAO implements IDAO<Cidade> {
             preparedStatement.setString(1, cidade.getNome().toUpperCase());
             preparedStatement.setString(2, cidade.getCep());
             preparedStatement.setString(3, cidade.getSituacao().toUpperCase());
+            preparedStatement.setInt(4,cidade.getCodigo());
 
             preparedStatement.executeUpdate();
             preparedStatement.close();

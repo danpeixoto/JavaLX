@@ -9,9 +9,9 @@ import java.util.List;
 
 public class TipoDAO implements IDAO<TipoProduto> {
 
-    private static final String ADD_TIPO = "insert into tb_tipo_produto(des_tipo) values(?);";
+    private static final String ADD_TIPO = "insert into tb_tipo_produto(desc_tipo) values(?);";
     private static final String REMOVE_TIPO = "delete from tb_tipo_produto where cod_tipo= ?;";
-    private static final String UPDATE_TIPO = "update tb_tipo_produto set desc_tipo=? , ind_stuacao=? " +
+    private static final String UPDATE_TIPO = "update tb_tipo_produto set desc_tipo=? , ind_situacao=? " +
             "where cod_tipo=?;";
     private static final String GETALL_TIPO = "select * from tb_tipo_produto;";
     private static final String GETBYID_TIPO = "select * from tb_tipo_produto where cod_tipo=?;";

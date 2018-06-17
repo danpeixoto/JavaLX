@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="136.0" prefWidth="255.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ContraladorJAdminEstado">
+   <children>
+      <TextField fx:id="estado" layoutX="79.0" layoutY="41.0" />
+      <Label layoutX="27.0" layoutY="45.0" text="Estado:" />
+      <TextField fx:id="uf" layoutX="79.0" layoutY="79.0" />
+      <Label layoutX="27.0" layoutY="83.0" text="UF:" />
+   </children>
+</AnchorPane>

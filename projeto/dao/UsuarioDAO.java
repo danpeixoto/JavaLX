@@ -15,7 +15,7 @@ public class UsuarioDAO implements IDAO<Usuario>{
             "cod_cidade) values(?,?,?,?,?);";
     private static final String REMOVE_USUARIO = "delete from tb_usuario where cod_usuario=?;";
     private static final String UPDATE_USUARIO = "update tb_usuario set nome_usuario=?,email_usuario=?," +
-            "celular_usuario=?,senha_usuario=?,cod_cidade=?, ind_stuacao=? " +
+            "celular_usuario=?,senha_usuario=?,cod_cidade=?, ind_situacao=? " +
             "where cod_usuario=?;";
     private static final String GETALL_USUARIOS_BY_CIDADE = "select * from tb_usuario where cod_cidade=?;";
     private static final String GET_USUARIO_BY_SENHA_EMAIL ="select * from tb_usuario where email_usuario=? and senha_usuario=?;";

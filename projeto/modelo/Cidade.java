@@ -17,9 +17,9 @@ public class Cidade {
 
     public Cidade(){}
 
-    public Cidade(SimpleStringProperty nome, SimpleStringProperty cep, Estado estado) {
-        this.nome = nome;
-        this.cep = cep;
+    public Cidade(String nome, String cep, Estado estado) {
+        this.nome.setValue(nome);
+        this.cep.setValue(cep);
         this.estado = estado;
     }
 

@@ -13,8 +13,8 @@ public class TipoProduto {
 
     public TipoProduto(){}
 
-    public TipoProduto(SimpleStringProperty tipo) {
-        this.tipo = tipo;
+    public TipoProduto(String tipo) {
+        this.tipo.setValue(tipo);
     }
 
     public int getCodigo() {
