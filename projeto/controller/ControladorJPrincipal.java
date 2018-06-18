@@ -11,7 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
+
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -48,6 +48,9 @@ public class ControladorJPrincipal implements Initializable{
 
     @FXML
     private Button meusProdBnt;
+
+    @FXML
+    private Button modUserBnt;
 
     @FXML
     private TableView<Produto> tabelaProdutos;
@@ -242,5 +245,26 @@ public class ControladorJPrincipal implements Initializable{
             e.printStackTrace();
         }
 
+    }
+
+
+    @FXML
+    public void gerarJanelaModUser() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("../view/JanelaModificarUsuario.fxml"));
+            Parent janelaModUser = fxmlLoader.load();
+            Scene novoProdScene = new Scene(janelaModUser);
+            Stage novoProdStage = new Stage();
+            novoProdStage.setTitle("Modificar Usuario");
+            ControladorModificarCadastro controlador = fxmlLoader.getController();
+            controlador.inserirInformacoes(usuarioAtual);
+            novoProdStage.setScene(novoProdScene);
+            novoProdStage.initModality(Modality.APPLICATION_MODAL);
+            novoProdStage.showAndWait();//show and wait ,serve para impedir que o codigo abaixo seja executado antes da janela fechar
+            atualizarTabelaProdutos();//atualiza a tabela com o novo produto
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

@@ -10,27 +10,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ControladorJPrincipal">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ControladorJPrincipal">
    <children>
-      <AnchorPane onKeyPressed="#atualizar" prefHeight="105.0" prefWidth="600.0" style="-fx-background-color: #61b876;">
+      <AnchorPane onKeyPressed="#atualizar" prefHeight="83.0" prefWidth="600.0" style="-fx-background-color: #61b876;">
          <children>
-            <TextField fx:id="buscaField" layoutX="14.0" layoutY="26.0" promptText="Buscar" style="-fx-background-color: white; -fx-prompt-text-fill: #489f81; -fx-text-fill: #61b876;" />
-            <ComboBox fx:id="buscaBox" layoutX="174.0" layoutY="26.0" prefHeight="25.0" prefWidth="101.0" promptText="Busca" style="-fx-background-color: white;" />
-            <Button fx:id="buscaBnt" layoutX="283.0" layoutY="26.0" mnemonicParsing="false" onAction="#buscarProdutos" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: white;" text="Buscar" textFill="#489f81" />
-            <Button fx:id="novoProdutoBnt" layoutX="348.0" layoutY="24.0" mnemonicParsing="false" onAction="#gerarJanelaNovoProduto" style="-fx-background-color: #f5d21f;" text="Novo Produto" textFill="WHITE">
+            <TextField fx:id="buscaField" layoutX="14.0" layoutY="41.0" promptText="Buscar" style="-fx-background-color: white; -fx-prompt-text-fill: #489f81; -fx-text-fill: #61b876;" />
+            <ComboBox fx:id="buscaBox" layoutX="174.0" layoutY="41.0" prefHeight="25.0" prefWidth="101.0" promptText="Busca" style="-fx-background-color: white;" />
+            <Button fx:id="buscaBnt" layoutX="283.0" layoutY="41.0" mnemonicParsing="false" onAction="#buscarProdutos" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: white;" text="Buscar" textFill="#489f81" />
+            <Button fx:id="novoProdutoBnt" layoutX="348.0" layoutY="39.0" mnemonicParsing="false" onAction="#gerarJanelaNovoProduto" style="-fx-background-color: #f5d21f;" text="Novo Produto" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="meusProdBnt" layoutX="472.0" layoutY="24.0" mnemonicParsing="false" onAction="#mostrarProdutosUsuarioAtual" style="-fx-background-color: #f5d21f;" text="Meus Produtos" textFill="WHITE">
+            <Button fx:id="meusProdBnt" layoutX="472.0" layoutY="39.0" mnemonicParsing="false" onAction="#mostrarProdutosUsuarioAtual" style="-fx-background-color: #f5d21f;" text="Meus Produtos" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Label layoutX="219.0" layoutY="6.0" text="Precione F5 para atualizar a tabela" textFill="WHITE" />
+            <Label layoutX="220.0" layoutY="6.0" text="Precione F5 para atualizar a tabela" textFill="WHITE" />
+            <Button fx:id="modUserBnt" layoutX="472.0" layoutY="2.0" mnemonicParsing="false" onAction="#gerarJanelaModUser" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: #f5d21f;" text="Modificar Usuario" textFill="WHITE" />
          </children>
       </AnchorPane>
-      <TableView fx:id="tabelaProdutos" onKeyPressed="#atualizar" onMouseClicked="#lidarComClique" prefHeight="380.0" prefWidth="600.0" style="-fx-background-color: white;">
+      <TableView fx:id="tabelaProdutos" onKeyPressed="#atualizar" onMouseClicked="#lidarComClique" prefHeight="347.0" prefWidth="600.0" style="-fx-background-color: white;">
         <columns>
           <TableColumn fx:id="nomeCol" editable="false" prefWidth="228.0" resizable="false" text="Nome" />
             <TableColumn fx:id="vendedorCol" editable="false" prefWidth="209.0" resizable="false" text="Vendedor" />
