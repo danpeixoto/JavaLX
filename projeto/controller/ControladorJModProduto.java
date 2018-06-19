@@ -31,13 +31,24 @@ public class ControladorJModProduto {
 
     @FXML
     void modificarProduto() {
-        produtoModificado.setNome(nomeProduto.getText().toUpperCase());
-        produtoModificado.setDescricao(descProduto.getText().toUpperCase());
-        produtoModificado.setPreco(Double.parseDouble(precoProduto.getText()));
-        ProdutoDAO produtoDAO = new ProdutoDAO(DbConnection.getConexao());
-        produtoDAO.update(produtoModificado);
-        Stage stage = (Stage) modificarBnt.getScene().getWindow();
-        stage.close();
+
+        if ((nomeProduto != null && nomeProduto.getText().isEmpty()) && (precoProduto != null && precoProduto.getText().isEmpty())
+                && (descProduto != null && descProduto.getText().isEmpty())) {
+            produtoModificado.setNome(nomeProduto.getText().toUpperCase());
+            produtoModificado.setDescricao(descProduto.getText().toUpperCase());
+            produtoModificado.setPreco(Double.parseDouble(precoProduto.getText()));
+            ProdutoDAO produtoDAO = new ProdutoDAO(DbConnection.getConexao());
+            produtoDAO.update(produtoModificado);
+            Stage stage = (Stage) modificarBnt.getScene().getWindow();
+            stage.close();
+        }else{
+            erroLabel.setVisible(false);
+        }
+
+        nomeProduto.setText("");
+        descProduto.setText("");
+        precoProduto.setText("");
+
     }
 
 

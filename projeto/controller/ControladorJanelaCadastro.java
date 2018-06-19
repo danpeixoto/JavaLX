@@ -79,8 +79,9 @@ public class ControladorJanelaCadastro implements Initializable {
         String email = emailUsuario.getText().trim();
         String cel = celUsuario.getText().trim();
         Cidade cidade = cidades.getSelectionModel().getSelectedItem();
-        if( (usr != null) && (pass != null) &&(email != null) && (cel != null)
-                &&  cidade != null ){
+
+        if( (usr != null && !usr.isEmpty()) && (pass != null && pass.isEmpty()) &&(email != null && email.isEmpty())
+                && (cel != null && cel.isEmpty()) &&  cidade != null ){
             UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
             usuarioDAO.add(new Usuario(usr,email,cel,pass,cidade));
             Stage stage = (Stage) cadastrarBnt.getScene().getWindow();
@@ -88,6 +89,11 @@ public class ControladorJanelaCadastro implements Initializable {
         }else{
             erroLabel.setVisible(true);
         }
+
+        nomeUsuario.setText("");
+        senhaUsuario.setText("");
+        emailUsuario.setText("");
+        celUsuario.setText("");
 
     }
 }

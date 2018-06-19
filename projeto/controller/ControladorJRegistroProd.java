@@ -4,13 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import projeto.dao.LoginDAO;
 import projeto.dao.ProdutoDAO;
 import projeto.dao.TipoDAO;
-import projeto.dao.UsuarioDAO;
 import projeto.modelo.Produto;
 import projeto.modelo.TipoProduto;
 import projeto.modelo.Usuario;
@@ -68,19 +65,24 @@ public class ControladorJRegistroProd implements Initializable {
 
     public void gerarNovoPodruto() {
         TipoProduto tipoSelecionado = tiposBox.getSelectionModel().getSelectedItem();
-        if ((nomeProduto != null) && (precoProduto != null) && (descProduto != null) && (tipoSelecionado != null)) {
+        if ((nomeProduto != null && nomeProduto.getText().isEmpty()) && (precoProduto != null && precoProduto.getText().isEmpty())
+                && (descProduto != null && descProduto.getText().isEmpty()) && (tipoSelecionado != null)) {
+
             Produto novoProduto = new Produto(nomeProduto.getText().toUpperCase(), descProduto.getText().toUpperCase(),
                     precoProduto.getText().replaceAll(",", "."), usuario,
                     tiposBox.getSelectionModel().getSelectedItem());
 
             ProdutoDAO produtoDAO = new ProdutoDAO(connection);
             produtoDAO.add(novoProduto);
-            Stage stage = (Stage)cadastrarBnt.getScene().getWindow();
+            Stage stage = (Stage) cadastrarBnt.getScene().getWindow();
             stage.close();
         } else {
             erroLabel.setVisible(true);
         }
 
+        nomeProduto.setText("");
+        descProduto.setText("");
+        precoProduto.setText("");
 
     }
 }
