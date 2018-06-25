@@ -78,8 +78,8 @@ public class ControladorModificarCadastro implements Initializable{
         String email = emailUsuario.getText().trim();
         String cel = celUsuario.getText().trim();
         Cidade cidade = cidades.getSelectionModel().getSelectedItem();
-        if( (usr != null && !usr.isEmpty()) && (pass != null && pass.isEmpty()) &&(email != null && email.isEmpty())
-                && (cel != null && cel.isEmpty()) &&  cidade != null ){
+        if( (usr != null && !usr.isEmpty()) && (pass != null && !pass.isEmpty()) &&(email != null && !email.isEmpty())
+                && (cel != null && !cel.isEmpty()) &&  cidade != null ){
             UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
             usuarioAux.setNome(usr);
             usuarioAux.setSenha(pass);

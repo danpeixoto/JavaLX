@@ -59,6 +59,8 @@ public class ControladorJanelaCadastro implements Initializable {
             observableList.add(e);
         }
         estados.setItems(observableList);//popula esta combobox com as uf dos estados que estao presentes no bd
+
+
     }
 
 
@@ -80,8 +82,8 @@ public class ControladorJanelaCadastro implements Initializable {
         String cel = celUsuario.getText().trim();
         Cidade cidade = cidades.getSelectionModel().getSelectedItem();
 
-        if( (usr != null && !usr.isEmpty()) && (pass != null && pass.isEmpty()) &&(email != null && email.isEmpty())
-                && (cel != null && cel.isEmpty()) &&  cidade != null ){
+        if( ((usr != null) && !usr.isEmpty()) && ((pass != null) && !pass.isEmpty()) && (email != null && !email.isEmpty() ) &&
+                ((cel != null) &&  !cel.isEmpty() ) &&  cidade != null ){
             UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
             usuarioDAO.add(new Usuario(usr,email,cel,pass,cidade));
             Stage stage = (Stage) cadastrarBnt.getScene().getWindow();

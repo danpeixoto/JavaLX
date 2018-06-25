@@ -65,8 +65,8 @@ public class ControladorJRegistroProd implements Initializable {
 
     public void gerarNovoPodruto() {
         TipoProduto tipoSelecionado = tiposBox.getSelectionModel().getSelectedItem();
-        if ((nomeProduto != null && nomeProduto.getText().isEmpty()) && (precoProduto != null && precoProduto.getText().isEmpty())
-                && (descProduto != null && descProduto.getText().isEmpty()) && (tipoSelecionado != null)) {
+        if ((nomeProduto != null && !nomeProduto.getText().isEmpty()) && (precoProduto != null && !precoProduto.getText().isEmpty()) &&
+                (descProduto != null && !descProduto.getText().isEmpty()) && (tipoSelecionado != null)) {
 
             Produto novoProduto = new Produto(nomeProduto.getText().toUpperCase(), descProduto.getText().toUpperCase(),
                     precoProduto.getText().replaceAll(",", "."), usuario,

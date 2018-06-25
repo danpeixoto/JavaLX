@@ -32,8 +32,8 @@ public class ControladorJModProduto {
     @FXML
     void modificarProduto() {
 
-        if ((nomeProduto != null && nomeProduto.getText().isEmpty()) && (precoProduto != null && precoProduto.getText().isEmpty())
-                && (descProduto != null && descProduto.getText().isEmpty())) {
+        if ((nomeProduto != null && !nomeProduto.getText().isEmpty()) && (precoProduto != null && !precoProduto.getText().isEmpty())
+                && (descProduto != null && !descProduto.getText().isEmpty())) {
             produtoModificado.setNome(nomeProduto.getText().toUpperCase());
             produtoModificado.setDescricao(descProduto.getText().toUpperCase());
             produtoModificado.setPreco(Double.parseDouble(precoProduto.getText()));
