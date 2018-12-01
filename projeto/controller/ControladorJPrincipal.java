@@ -308,4 +308,25 @@ public class ControladorJPrincipal implements Initializable{
 
 
 
+    @FXML
+    public void logout(){
+        Parent janelaLogin = null;
+        try {
+            Stage stage = (Stage) buscaBnt.getScene().getWindow();
+            stage.close();
+            janelaLogin = FXMLLoader.load(getClass().getResource("../view/JanelaLogin.fxml"));
+            Scene loginScene = new Scene(janelaLogin, 600  , 400);
+            Stage loginStage = new Stage();
+
+            loginStage.setTitle("Login");
+            loginStage.setResizable(false);
+            loginStage.setScene(loginScene);
+            loginStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }

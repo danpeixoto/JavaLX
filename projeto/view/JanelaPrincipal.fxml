@@ -20,7 +20,7 @@
             <ComboBox fx:id="buscaBox" layoutX="14.0" layoutY="39.0" prefHeight="25.0" prefWidth="101.0" promptText="Opção" style="-fx-background-color: white;" />
             <Button fx:id="buscaBnt" layoutX="122.0" layoutY="39.0" mnemonicParsing="false" onAction="#buscarProdutos" prefHeight="25.0" prefWidth="56.0" style="-fx-background-color: white;" textFill="#489f81">
                <graphic>
-                  <ImageView fitHeight="12.0" fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true">
+                  <ImageView fitHeight="17.0" fitWidth="26.0" nodeOrientation="INHERIT" pickOnBounds="true">
                      <image>
                         <Image url="@../imagens/lupa.png" />
                      </image>
@@ -37,7 +37,7 @@
                </font>
             </Button>
             <Button fx:id="modUserBnt" layoutX="323.0" layoutY="35.0" mnemonicParsing="false" onAction="#gerarJanelaModUser" prefHeight="30.0" prefWidth="114.0" style="-fx-background-color: #f5d21f;" text="Modificar Usuario" textFill="WHITE" />
-            <Button fx:id="modUserBnt1" layoutX="645.0" layoutY="-1.0" mnemonicParsing="false" onAction="#atualizarTabelaProdutos" prefHeight="30.0" prefWidth="34.0" style="-fx-background-color: #f5d21f;" textFill="WHITE">
+            <Button fx:id="atualizarBnt" layoutX="605.0" layoutY="-1.0" mnemonicParsing="false" onAction="#atualizarTabelaProdutos" prefHeight="30.0" prefWidth="34.0" style="-fx-background-color: #f5d21f;" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
@@ -66,6 +66,15 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <Button fx:id="sairBnt" layoutX="645.0" layoutY="-1.0" mnemonicParsing="false" onAction="#logout" prefHeight="30.0" prefWidth="34.0" style="-fx-background-color: #f5d21f;" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="18.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../imagens/power.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
       <TableView fx:id="tabelaProdutos" onKeyPressed="#atualizar" onMouseClicked="#lidarComClique" prefHeight="508.0" prefWidth="679.0" style="-fx-background-color: white;">
