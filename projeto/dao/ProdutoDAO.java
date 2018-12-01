@@ -13,14 +13,14 @@ import java.util.List;
 
 public class ProdutoDAO implements IDAO<Produto> {
     private static final String ADD_PRODUTO = "insert into tb_produto(nome_produto,desc_produto,val_preco,cod_usuario," +
-            "cod_tipo_produto) values(?,?,?,?,?);";
+            "cod_tipo_produto , quantidade_produto) values(?,?,?,?,?,?);";
     private static final String REMOVE_PRODUTO = "delete from tb_produto where cod_produto=?;";
-    private static final String UPDATE_PRODUTO = "update tb_produto set nome_produto=?,desc_produto=?," +
-            "val_preco=? " +
+    private static final String UPDATE_PRODUTO = "update tb_produto SET nome_produto=?,desc_produto=?," +
+            "val_preco=? , quantidade_produto=? " +
             "where cod_produto=?;";
     private static final String GETALL_PRODUTOS = "select * from tb_produto where cod_usuario=? order by cod_tipo_produto ASC;";
-    private static final String GETALL_PRODUTOS_BY_TIPO = "select * from tb_produto where cod_tipo_produto=" +
-            "(select cod_tipo from tb_tipo_produto where desc_tipo=?) order by cod_usuario ASC;";
+    /*select all products where desc_tipo is the same as the searched type*/
+    private static final String GETALL_PRODUTOS_BY_TIPO = "select * from tb_produto inner join tb_tipo_produto on cod_tipo_produto = cod_tipo where tb_tipo_produto.desc_tipo = upper(?);";
     private static final String GETBYID_PRODUTO = "select * from tb_produto where cod_produto=?;";
     private static final String GETALL_PRODUTOS_BY_NOME = "select * from tb_produto where nome_produto=?" +
             " order by cod_usuario ASC , cod_tipo_produto ASC;";
@@ -31,8 +31,7 @@ public class ProdutoDAO implements IDAO<Produto> {
     private static final String COLUNA_NOME = "nome_produto";
     private static final String COlUNA_DESC = "desc_produto";
     private static final String COLUNA_PRECO = "val_preco";
-
-
+    private static final String COLUNA_QUANTIDADE = "quantidade_produto";
     private Connection conexao;
 
     public ProdutoDAO(Connection connection) {
@@ -49,7 +48,7 @@ public class ProdutoDAO implements IDAO<Produto> {
             preparedStatement.setDouble(3, produto.getPreco());
             preparedStatement.setInt(4, produto.getUsuario().getCodigo());
             preparedStatement.setInt(5, produto.getTipo().getCodigo());
-
+            preparedStatement.setInt(6,produto.getQuantidade());
             preparedStatement.executeUpdate();
             preparedStatement.close();
 
@@ -84,8 +83,8 @@ public class ProdutoDAO implements IDAO<Produto> {
             preparedStatement.setString(1, produto.getNome().toUpperCase());
             preparedStatement.setString(2, produto.getDescricao().toUpperCase());
             preparedStatement.setDouble(3, produto.getPreco());
-            preparedStatement.setInt(4, produto.getCodigo());
-
+            preparedStatement.setInt(4,produto.getQuantidade());
+            preparedStatement.setInt(5, produto.getCodigo());
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {
@@ -122,7 +121,7 @@ public class ProdutoDAO implements IDAO<Produto> {
                     produtoAux.setPreco(resultSet.getDouble(COLUNA_PRECO));
                     produtoAux.setTipo(tipoProduto);
                     produtoAux.setUsuario(u);
-
+                    produtoAux.setQuantidade(resultSet.getInt(COLUNA_QUANTIDADE));
                     produtos.add(produtoAux);
                 }
 
@@ -162,6 +161,7 @@ public class ProdutoDAO implements IDAO<Produto> {
                 produtoBuscado.setPreco(resultSet.getDouble(COLUNA_PRECO));
                 produtoBuscado.setTipo(tipoProduto);
                 produtoBuscado.setUsuario(usuario);
+                produtoBuscado.setQuantidade(resultSet.getInt(COLUNA_QUANTIDADE));
             }
 
 
@@ -206,7 +206,7 @@ public class ProdutoDAO implements IDAO<Produto> {
                 produtoAux.setPreco(resultSet.getDouble(COLUNA_PRECO));
                 produtoAux.setTipo(tipoProduto);
                 produtoAux.setUsuario(usuario);
-
+                produtoAux.setQuantidade(resultSet.getInt(COLUNA_QUANTIDADE));
                 produtos.add(produtoAux);
             }
         } catch (SQLException e) {
@@ -244,7 +244,7 @@ public class ProdutoDAO implements IDAO<Produto> {
                     produtoAux.setPreco(resultSet.getDouble(COLUNA_PRECO));
                     produtoAux.setTipo(tipoProduto);
                     produtoAux.setUsuario(u);
-
+                    produtoAux.setQuantidade(resultSet.getInt(COLUNA_QUANTIDADE));
                     produtos.add(produtoAux);
                 }
 
@@ -291,7 +291,7 @@ public class ProdutoDAO implements IDAO<Produto> {
                 produtoAux.setPreco(resultSet.getDouble(COLUNA_PRECO));
                 produtoAux.setTipo(tipoProduto);
                 produtoAux.setUsuario(usuario);
-
+                produtoAux.setQuantidade(resultSet.getInt(COLUNA_QUANTIDADE));
                 produtos.add(produtoAux);
             }
         } catch (SQLException e) {

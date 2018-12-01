@@ -1,6 +1,5 @@
 package projeto.controller;
 
-import com.mysql.cj.protocol.Resultset;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +9,7 @@ import javafx.stage.Stage;
 import projeto.dao.CidadeDAO;
 import projeto.dao.EstadoDAO;
 import projeto.dao.UsuarioDAO;
+import projeto.exception.EmailRegistradoException;
 import projeto.modelo.Cidade;
 import projeto.modelo.Estado;
 import projeto.modelo.Usuario;
@@ -17,7 +17,6 @@ import projeto.servicos.DbConnection;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -85,10 +84,24 @@ public class ControladorJanelaCadastro implements Initializable {
         if( ((usr != null) && !usr.isEmpty()) && ((pass != null) && !pass.isEmpty()) && (email != null && !email.isEmpty() ) &&
                 ((cel != null) &&  !cel.isEmpty() ) &&  cidade != null ){
             UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
-            usuarioDAO.add(new Usuario(usr,email,cel,pass,cidade));
-            Stage stage = (Stage) cadastrarBnt.getScene().getWindow();
-            stage.close();
+
+
+            try {
+                /*Antes de cadastras verifica se o email ja foi usado em outra conta
+                 * se sim , o método add retorna falso e isso é trado mostrando para o usuário*/
+                usuarioDAO.add(new Usuario(usr,email,cel,pass,cidade , 0 , (float) 0.0));
+                Stage stage = (Stage) cadastrarBnt.getScene().getWindow();
+                stage.close();
+
+            } catch (EmailRegistradoException e) {
+                e.printStackTrace();
+                erroLabel.setText("Email já registrado.");
+                erroLabel.setVisible(true);
+            }
+
+
         }else{
+            erroLabel.setText("Erro nos dados do Cadastro");
             erroLabel.setVisible(true);
         }
 

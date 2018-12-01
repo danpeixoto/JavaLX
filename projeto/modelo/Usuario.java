@@ -1,9 +1,8 @@
 package projeto.modelo;
 
-import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 import java.util.Objects;
 
@@ -13,18 +12,23 @@ public class Usuario {
     private SimpleStringProperty email = new SimpleStringProperty();
     private SimpleStringProperty celular = new SimpleStringProperty();
     private SimpleStringProperty senha = new SimpleStringProperty();
+    private SimpleFloatProperty saldo = new SimpleFloatProperty();
+    private SimpleIntegerProperty nota = new SimpleIntegerProperty();
     private SimpleStringProperty situacao = new SimpleStringProperty();
     private Cidade cidade;
 
     public Usuario(){}
 
-    public Usuario(String nome, String email, String celular, String senha , Cidade cidade) {
+    public Usuario(String nome, String email, String celular, String senha , Cidade cidade , int nota , float saldo) {
         this.nome.set(nome);
         this.email.set(email);
         this.celular.set(celular);
         this.senha.set(senha);
         this.cidade = cidade;
+        this.saldo.set(saldo);
+        this.nota.set(nota);
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -33,12 +37,36 @@ public class Usuario {
         Usuario usuario = (Usuario) o;
         return Objects.equals(email, usuario.email);
     }
-
     @Override
     public int hashCode() {
-
         return Objects.hash(email);
     }
+
+
+    public float getSaldo() {
+        return saldo.get();
+    }
+
+    public SimpleFloatProperty saldoProperty() {
+        return saldo;
+    }
+
+    public void setSaldo(float saldo) {
+        this.saldo.set(saldo);
+    }
+
+    public int getNota() {
+        return nota.get();
+    }
+
+    public SimpleIntegerProperty notaProperty() {
+        return nota;
+    }
+
+    public void setNota(int nota) {
+        this.nota.set(nota);
+    }
+
 
     @Override
     public String toString() {

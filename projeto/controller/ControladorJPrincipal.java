@@ -3,7 +3,6 @@ package projeto.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -53,6 +51,9 @@ public class ControladorJPrincipal implements Initializable{
     private Button modUserBnt;
 
     @FXML
+    private Button addSaldoBnt;
+
+    @FXML
     private TableView<Produto> tabelaProdutos;
 
     @FXML
@@ -67,6 +68,11 @@ public class ControladorJPrincipal implements Initializable{
     @FXML
     private TableColumn<Produto, String>  tipoCol;
 
+    @FXML
+    private Label saldoLabel;
+
+    @FXML
+    private Label notaLabel;
 
     private Connection connection;
     private ObservableList<Produto> observableList;
@@ -80,13 +86,15 @@ public class ControladorJPrincipal implements Initializable{
         atualizarTabelaProdutos();
         tabelaProdutos.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tabelaProdutos.getSelectionModel().selectFirst();
-        //inicializar a comboBox de tipos de busca , Nome Produto , Vendedor , Tipo Produto
 
-        ObservableList<String> tiposDeBusca = FXCollections.observableArrayList("Vendedor","Nome","Tipo");
+        //inicializar a comboBox de tipos de busca , Nome Produto , Vendedor , Tipo Produto
+        ObservableList<String> tiposDeBusca = FXCollections.observableArrayList("Vendedor","Produto","Tipo");
         buscaBox.setItems(tiposDeBusca);
 
         UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
         usuarioAtual = usuarioDAO.getUsuarioByEmailSenha(LoginDAO.getEmail(), LoginDAO.getSenha());
+        saldoLabel.setText(String.valueOf( usuarioAtual.getSaldo() ));
+        notaLabel.setText(String.valueOf( usuarioAtual.getNota() ));
     }
 
 
@@ -120,6 +128,8 @@ public class ControladorJPrincipal implements Initializable{
     public void atualizar(KeyEvent keyEvent){
         if(keyEvent.getCode() == KeyCode.F5){
             atualizarTabelaProdutos();
+            saldoLabel.setText(String.valueOf(usuarioAtual.getSaldo()));
+            notaLabel.setText(String.valueOf(usuarioAtual.getNota()));
         }
     }
     public void gerarJanelaNovoProduto(ActionEvent e) throws IOException {
@@ -137,7 +147,7 @@ public class ControladorJPrincipal implements Initializable{
     public void buscarProdutos(){
 
        if(buscaField.getText() != null) {
-           if (buscaBox.getSelectionModel().getSelectedItem() == "Nome") {
+           if (buscaBox.getSelectionModel().getSelectedItem() == "Produto") {
                ProdutoDAO produtoDAO = new ProdutoDAO(connection);
                ObservableList<Produto> produtosNome =
                        FXCollections.observableArrayList(produtoDAO.getByNome(buscaField.getText().toUpperCase()));
@@ -237,9 +247,13 @@ public class ControladorJPrincipal implements Initializable{
 
             ControladorJanelaProduto controladorJanelaProduto = fxmlLoader.getController();
             controladorJanelaProduto.mostrarProduto(produto);
+            controladorJanelaProduto.setUsuarioAtual(usuarioAtual);
 
             stage.setResizable(false);
-            stage.show();
+            stage.showAndWait();
+
+            saldoLabel.setText(String.valueOf(usuarioAtual.getSaldo()));
+            notaLabel.setText(String.valueOf(usuarioAtual.getNota()));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -267,4 +281,31 @@ public class ControladorJPrincipal implements Initializable{
             e.printStackTrace();
         }
     }
+
+
+    @FXML
+    public void adicionarSaldo(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("../view/JanelaAddSaldo.fxml"));
+            Parent janelaAddSaldo = fxmlLoader.load();
+            Scene novoProdScene = new Scene(janelaAddSaldo);
+            Stage novoProdStage = new Stage();
+            novoProdStage.setTitle("Adicionar Saldo");
+            ControladorJAddSaldo controlador = fxmlLoader.getController();
+            controlador.setUsuario(usuarioAtual);
+            novoProdStage.setScene(novoProdScene);
+            novoProdStage.initModality(Modality.APPLICATION_MODAL);
+            novoProdStage.showAndWait();//show and wait ,serve para impedir que o codigo abaixo seja executado antes da janela fechar
+            atualizarTabelaProdutos();//atualiza a tabela com o novo produto
+
+            saldoLabel.setText(String.valueOf(usuarioAtual.getSaldo()));
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+
+
 }

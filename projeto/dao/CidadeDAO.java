@@ -2,7 +2,6 @@ package projeto.dao;
 
 import projeto.modelo.Cidade;
 import projeto.modelo.Estado;
-import projeto.servicos.DbConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

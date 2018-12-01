@@ -1,17 +1,17 @@
 package projeto.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import projeto.dao.ProdutoDAO;
 import projeto.modelo.Produto;
 import projeto.servicos.DbConnection;
 
-public class ControladorJModProduto {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ControladorJModProduto implements Initializable {
     @FXML
     private TextField nomeProduto;
 
@@ -27,7 +27,21 @@ public class ControladorJModProduto {
     @FXML
     private Label erroLabel;
 
+    @FXML
+    private Spinner<Integer> qntSpinner;
+
     private Produto produtoModificado;
+
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        SpinnerValueFactory<Integer> spinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,100);
+        qntSpinner.setValueFactory(spinnerValueFactory);
+        qntSpinner.setEditable(true);
+    }
+
+
 
     @FXML
     void modificarProduto() {
@@ -37,6 +51,9 @@ public class ControladorJModProduto {
             produtoModificado.setNome(nomeProduto.getText().toUpperCase());
             produtoModificado.setDescricao(descProduto.getText().toUpperCase());
             produtoModificado.setPreco(Double.parseDouble(precoProduto.getText()));
+            produtoModificado.setQuantidade(qntSpinner.getValue());
+
+
             ProdutoDAO produtoDAO = new ProdutoDAO(DbConnection.getConexao());
             produtoDAO.update(produtoModificado);
             Stage stage = (Stage) modificarBnt.getScene().getWindow();

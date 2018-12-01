@@ -1,12 +1,12 @@
 package projeto.controller;
 
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import projeto.dao.LoginDAO;
@@ -72,7 +72,7 @@ public class ControldorJanelaLogin implements Initializable {
 
     private void mudarJanelaPrincipal() throws IOException{
         Parent janelaPrincipal = FXMLLoader.load(getClass().getResource("../view/JanelaPrincipal.fxml"));
-        Scene principalScene = new Scene(janelaPrincipal, 600, 400);
+        Scene principalScene = new Scene(janelaPrincipal, 679, 508);
         Stage principalStage = new Stage();
 
         principalStage.setTitle("JavaLX");
@@ -97,6 +97,7 @@ public class ControldorJanelaLogin implements Initializable {
             this.conexao.setText("Conectado.");
         }else {
             this.conexao.setText("Não conectado com o DB.");
+            this.conexao.setTextFill(Color.rgb(255,0,0));
         }
     }
 }

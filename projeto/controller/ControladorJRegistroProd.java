@@ -32,11 +32,6 @@ public class ControladorJRegistroProd implements Initializable {
     @FXML
     private TextArea descProduto;
 
-    @FXML
-    private Button imagemPicker;//não sera utilizado por equanto
-
-    @FXML
-    private Label pathImg;//não sera utilizado por equanto
 
     @FXML
     private ComboBox<TipoProduto> tiposBox;
@@ -44,16 +39,22 @@ public class ControladorJRegistroProd implements Initializable {
     @FXML
     private Label erroLabel;
 
-    private static Usuario usuario;
-
+    @FXML
+    private Spinner<Integer> qntSpinner;
 
     private Connection connection;
+
+    private static Usuario usuario;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         connection = DbConnection.getConexao();
         usuario = ControladorJPrincipal.usuarioAtual;
         carregarTipos();
+
+        SpinnerValueFactory<Integer> spinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,100);
+        qntSpinner.setValueFactory(spinnerValueFactory);
+        qntSpinner.setEditable(true);
     }
 
     public void carregarTipos() {
@@ -70,7 +71,7 @@ public class ControladorJRegistroProd implements Initializable {
 
             Produto novoProduto = new Produto(nomeProduto.getText().toUpperCase(), descProduto.getText().toUpperCase(),
                     precoProduto.getText().replaceAll(",", "."), usuario,
-                    tiposBox.getSelectionModel().getSelectedItem());
+                    tiposBox.getSelectionModel().getSelectedItem() , qntSpinner.getValue());
 
             ProdutoDAO produtoDAO = new ProdutoDAO(connection);
             produtoDAO.add(novoProduto);

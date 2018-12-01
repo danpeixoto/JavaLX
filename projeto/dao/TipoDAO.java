@@ -1,7 +1,6 @@
 package projeto.dao;
 
 import projeto.modelo.TipoProduto;
-import projeto.servicos.DbConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

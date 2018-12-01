@@ -1,9 +1,10 @@
 package projeto.modelo;
 
-import javafx.beans.property.*;
-import projeto.dao.TipoDAO;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-import java.sql.Blob;
 import java.util.Objects;
 
 public class Produto {
@@ -11,18 +12,19 @@ public class Produto {
     private StringProperty nome = new SimpleStringProperty();
     private StringProperty descricao = new SimpleStringProperty();
     private SimpleDoubleProperty preco = new SimpleDoubleProperty();
-    private Blob imagem;
+    private SimpleIntegerProperty quantidade = new SimpleIntegerProperty();
     private TipoProduto tipo;
     private Usuario usuario;
 
     public Produto(){}
 
-    public Produto(String nome, String descricao, String preco , Usuario usuario , TipoProduto tipo) {
+    public Produto(String nome, String descricao, String preco , Usuario usuario , TipoProduto tipo , int quantidade) {
         this.nome.setValue(nome);
         this.descricao.setValue(descricao);
         this.preco.setValue(Double.parseDouble(preco));
         this.usuario = usuario;
         this.tipo = tipo;
+        this.quantidade.set(quantidade);
     }
 
 
@@ -38,6 +40,18 @@ public class Produto {
     public int hashCode() {
 
         return Objects.hash(codigo);
+    }
+
+    public int getQuantidade() {
+        return quantidade.get();
+    }
+
+    public SimpleIntegerProperty quantidadeProperty() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade.set(quantidade);
     }
 
     public int getCodigo() {
@@ -56,9 +70,9 @@ public class Produto {
         return nome.get();
     }
 
-//    public StringProperty nomeProperty() {
-//        return nome;
-//    }
+    public StringProperty nomeProperty() {
+       return nome;
+   }
 
     public void setNome(String nome) {
         this.nome.set(nome);
@@ -88,14 +102,6 @@ public class Produto {
         this.preco.set(preco);
     }
 
-    public Blob getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(Blob imagem) {
-        this.imagem = imagem;
-    }
-
     public TipoProduto getTipo() {
         return tipo;
     }
@@ -111,4 +117,9 @@ public class Produto {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public void diminuirQuantidade(){
+        this.quantidade.set(quantidade.getValue()-1);
+    }
+
 }

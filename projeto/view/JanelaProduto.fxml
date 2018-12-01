@@ -1,50 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="projeto.controller.ControladorJanelaProduto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="296.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ControladorJanelaProduto">
    <children>
-      <ImageView fx:id="imagemProduto" fitHeight="241.0" fitWidth="315.0" layoutX="14.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="nomeProdLabel" layoutX="29.0" layoutY="14.0" prefHeight="45.0" prefWidth="560.0" text="NOME do PRODUTO" textFill="#2e2d2d">
+      <Label fx:id="nomeProdLabel" alignment="CENTER" layoutX="-1.0" layoutY="14.0" prefHeight="45.0" prefWidth="293.0" text="Daniel Peixoto Pinto da Silva" textAlignment="JUSTIFY" textFill="#2e2d2d" textOverrun="WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="71.0" prefHeight="37.0" prefWidth="71.0" text="Preço: " textFill="#2e2d2d">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Label layoutX="344.0" layoutY="97.0" prefHeight="37.0" prefWidth="71.0" text="Preço: " textFill="#2e2d2d">
+      <Label fx:id="precoLabel" layoutX="104.0" layoutY="71.0" prefHeight="37.0" prefWidth="155.0" text="\$$$$$$$$$$" textFill="#489f81">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Label fx:id="precoLabel" layoutX="415.0" layoutY="97.0" prefHeight="37.0" prefWidth="155.0" text="\$$$$$$$$$$" textFill="#489f81">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label layoutX="344.0" layoutY="157.0" prefHeight="37.0" prefWidth="78.0" text="Vendedor:" textFill="#2e2d2d">
+      <Label layoutX="26.0" layoutY="120.0" prefHeight="37.0" prefWidth="78.0" text="Vendedor:" textFill="#2e2d2d">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="vendedorLabel" layoutX="422.0" layoutY="157.0" prefHeight="37.0" prefWidth="178.0" text="Daniel Peixoto Pinto da silva" textFill="#489f81" />
-      <Label layoutX="344.0" layoutY="219.0" prefHeight="37.0" prefWidth="71.0" text="Contato:" textFill="#2e2d2d">
+      <Label fx:id="vendedorLabel" layoutX="116.0" layoutY="120.0" prefHeight="37.0" prefWidth="178.0" text="Daniel Peixoto Pinto da silva" textFill="#489f81" />
+      <Label layoutX="29.0" layoutY="219.0" prefHeight="37.0" prefWidth="71.0" text="Contato:" textFill="#2e2d2d">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="contatoLabel" layoutX="415.0" layoutY="219.0" prefHeight="37.0" prefWidth="155.0" text="\$$$$$$$$$$" textFill="#489f81">
+      <Label fx:id="contatoLabel" layoutX="116.0" layoutY="219.0" prefHeight="37.0" prefWidth="155.0" text="\$$$$$$$$$$" textFill="#489f81">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Label layoutX="29.0" layoutY="323.0" prefHeight="37.0" prefWidth="86.0" text="Descrição:" textFill="#2e2d2d">
+      <Label layoutX="22.0" layoutY="277.0" prefHeight="37.0" prefWidth="86.0" text="Descrição:" textFill="#2e2d2d">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextArea fx:id="descField" editable="false" layoutX="115.0" layoutY="314.0" prefHeight="64.0" prefWidth="471.0" style="-fx-background-color: white; -fx-text-fill: #489f81;" />
+      <TextArea fx:id="descField" editable="false" layoutX="104.0" layoutY="282.0" prefHeight="64.0" prefWidth="155.0" style="-fx-background-color: white; -fx-text-fill: #489f81;" />
+      <Label layoutX="26.0" layoutY="169.0" prefHeight="37.0" prefWidth="138.0" text="Nota do Vendedor" textFill="#2e2d2d">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="notaLabel" layoutX="164.0" layoutY="169.0" prefHeight="37.0" prefWidth="99.0" text="Daniel Peixoto Pinto da silva" textFill="#489f81" />
+      <Button fx:id="comprarBotao" layoutX="40.0" layoutY="424.0" mnemonicParsing="false" onAction="#gerenciarCompra" prefHeight="25.0" prefWidth="217.0" style="-fx-background-color: #489f81;" text="Comprar" textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Button>
+      <Label layoutX="19.0" layoutY="346.0" prefHeight="37.0" prefWidth="117.0" text="Avaliar vendedor:" textFill="#2e2d2d">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="likeButton" layoutX="186.0" layoutY="354.0" mnemonicParsing="false" onAction="#gerenciarLike" prefHeight="37.0" prefWidth="34.0" style="-fx-background-color: #ffffff;" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/like.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="dislikeButton" layoutX="225.0" layoutY="354.0" mnemonicParsing="false" onAction="#gerenciarDislike" prefHeight="37.0" prefWidth="34.0" style="-fx-background-color: #ffffff;" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/dislike.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="erroLabel" layoutX="29.0" layoutY="6.0" text="Erro" textFill="#c30101" visible="false" />
+      <Label fx:id="avaliadoLabel" layoutX="37.0" layoutY="399.0" prefHeight="17.0" prefWidth="224.0" text="Avaliado com sucesso" textFill="#489f81" visible="false" />
    </children>
 </AnchorPane>

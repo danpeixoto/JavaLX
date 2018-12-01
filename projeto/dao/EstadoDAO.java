@@ -1,7 +1,6 @@
 package projeto.dao;
 
 import projeto.modelo.Estado;
-import projeto.servicos.DbConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -40,6 +39,7 @@ public class EstadoDAO implements IDAO<Estado> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ControldorJanelaLogin">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ControldorJanelaLogin">
    <children>
       <TextField fx:id="entradaUsuario" alignment="CENTER" layoutX="125.0" layoutY="76.0" prefHeight="47.0" prefWidth="351.0" promptText="Email" style="-fx-background-color: lightgrey; -fx-prompt-text-fill: white; -fx-text-fill: #61b876;">
          <font>

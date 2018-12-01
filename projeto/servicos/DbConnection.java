@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class DbConnection {
 
-    private static final String USUARIO = "student";
-    private static final String SENHA = "student";
+    private static final String USUARIO = "Daniel";
+    private static final String SENHA = "daniel";
     private static final String NOME_DB = "javalx";
     private static final String CONN = "jdbc:mysql://127.0.0.1:3306/"+NOME_DB+"?autoReconnect=false&useSSL=false" +
             "&useTimezone=true&serverTimezone=UTC";
